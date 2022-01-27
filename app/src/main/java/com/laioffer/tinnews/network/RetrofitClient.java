@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     // TODO
-    private static final String API_KEY = "";
+    private static final String API_KEY = "X-Api-Key";
     private static final String BASE_URL = "https://newsapi.org/v2/";
 
     public static Retrofit newInstance() {
@@ -38,3 +38,4 @@ public class RetrofitClient {
             return chain.proceed(request);
         }
     }
+}

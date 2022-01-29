@@ -1,13 +1,20 @@
 package com.laioffer.tinnews;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.laioffer.tinnews.model.NewsResponse;
+import com.laioffer.tinnews.network.NewsApi;
+import com.laioffer.tinnews.network.RetrofitClient;
 
 public class MainActivity extends AppCompatActivity {
     //jetpack nav component
@@ -26,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(navView,navController);
         NavigationUI.setupActionBarWithNavController(this,navController);
+
+
     }
+
     //handling the top left back button on the title bar
     //The start destination of your navigation graph is considered the only top level destination.
     //On all other destinations, the ActionBar will show the Up button.

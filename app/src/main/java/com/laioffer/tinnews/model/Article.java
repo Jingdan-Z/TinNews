@@ -1,15 +1,22 @@
 package com.laioffer.tinnews.model;
 
-import java.util.Objects;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Article {
+import java.io.Serializable;
+import java.util.Objects;
+@Entity
+public class Article implements Serializable {
     //what we need to displace from the NewsApi response
     //source, id etc are omitted
     public String author;
     public String title;
     public String content;
     public String description;
-    public String url;
+    @NonNull
+    @PrimaryKey
+    public String url; //the primary key in Articles table in Room DB
     public String urlToImage;
     public String publishedAt;
 

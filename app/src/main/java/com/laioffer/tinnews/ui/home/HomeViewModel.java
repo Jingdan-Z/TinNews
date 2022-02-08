@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.laioffer.tinnews.model.Article;
 import com.laioffer.tinnews.model.NewsResponse;
 import com.laioffer.tinnews.repository.NewsRepository;
 
@@ -23,6 +24,10 @@ public class HomeViewModel extends ViewModel {
     // by applying switchMapFunction to each value set on source.
     public LiveData<NewsResponse> getTopHeadlines() {
         return Transformations.switchMap(countryInput,repository :: getTopHeadlines);
+    }
+    //different here: don’t need to expose the observing result.
+    public void setFavoriteArticleInput(Article article) {
+        repository.favoriteArticle(article);
     }
 
 }

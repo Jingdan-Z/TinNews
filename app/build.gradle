@@ -32,6 +32,12 @@ android {
 }
 
 dependencies {
+    //room DB
+    annotationProcessor "androidx.room:room-compiler:2.4.1"
+    implementation "androidx.room:room-guava:2.4.1"
+    implementation "androidx.room:room-runtime:2.4.1"
+    //card stack view
+    implementation "com.yuyakaido.android:card-stack-view:2.3.4"
     //picasso image display library
     implementation 'com.squareup.picasso:picasso:2.71828'
     //view model

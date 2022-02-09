@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.laioffer.tinnews.databinding.SearchNewsItemBinding;
 import com.laioffer.tinnews.model.Article;
 import com.laioffer.tinnews.R;
+import com.laioffer.tinnews.ui.save.SavedNewsAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -57,11 +58,21 @@ public class SearchNewsAdapter extends RecyclerView.Adapter<SearchNewsAdapter.Se
         holder.itemTitleTextView.setText((article.title));
         //display the image
         Picasso.get().load(article.urlToImage).resize(200, 200).into(holder.itemImageView);
-
+        holder.itemView.setOnClickListener(v -> itemCallback.onOpenDetails(article));
     }
 
     @Override
     public int getItemCount() {//provide current data collection size
         return articles.size();
     }
+    interface ItemCallback {
+        void onOpenDetails(Article article);
+    }
+
+    private ItemCallback itemCallback;
+
+    public void setItemCallback(ItemCallback itemCallback) {
+        this.itemCallback = itemCallback;
+    }
+
 }

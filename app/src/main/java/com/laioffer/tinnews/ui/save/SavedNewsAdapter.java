@@ -16,19 +16,21 @@ import com.laioffer.tinnews.model.Article;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedNewsAdapter extends RecyclerView.Adapter<SavedNewsAdapter.SavedNewsViewHolder>{
+public class SavedNewsAdapter extends RecyclerView.Adapter<SavedNewsAdapter.SavedNewsViewHolder> {
     // 1. Supporting data:
     private List<Article> articles = new ArrayList<>();
+
     public void setArticles(List<Article> newsList) {
         articles.clear();
         articles.addAll(newsList);
         notifyDataSetChanged();
     }
+
     // 2. Adapter overrides:
     @NonNull
     @Override
     public SavedNewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.saved_news_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.saved_news_item, parent, false);
         return new SavedNewsViewHolder(view);
 
     }
@@ -38,6 +40,8 @@ public class SavedNewsAdapter extends RecyclerView.Adapter<SavedNewsAdapter.Save
         Article article = articles.get(position);
         holder.authorTextView.setText(article.author);
         holder.descriptionTextView.setText(article.description);
+        holder.favoriteIcon.setOnClickListener(v -> itemCallback.onRemoveFavorite(article));
+        holder.itemView.setOnClickListener(v -> itemCallback.onOpenDetails(article));
 
     }
 
@@ -45,7 +49,6 @@ public class SavedNewsAdapter extends RecyclerView.Adapter<SavedNewsAdapter.Save
     public int getItemCount() {
         return articles.size();
     }
-
 
 
     // 3. SavedNewsViewHolder:
@@ -63,7 +66,23 @@ public class SavedNewsAdapter extends RecyclerView.Adapter<SavedNewsAdapter.Save
             favoriteIcon = binding.savedItemFavoriteImageView;
         }
     }
+
+    // 4. delete item feature
+    interface ItemCallback {
+//open a new fragment for article details
+        void onOpenDetails(Article article);
+//remove liked articles
+        void onRemoveFavorite(Article article);
+    }
+
+    private ItemCallback itemCallback;
+
+    public void setItemCallback(ItemCallback itemCallback) {
+        this.itemCallback = itemCallback;
+    }
 }
+
+
 
 
 
